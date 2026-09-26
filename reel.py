@@ -951,15 +951,20 @@ def s_montage(ctx, t):
 
 # ---------------------------------------------------------------- S6 SIGNATURE 11.5 - 15.0
 
+NAME = "Claude Opus 5.5"
 NAME_PX, NAME_BASE, DOT_R = 300, 590, 26
 
 
 def name_geom(ctx):
-    L = layout(ctx, "Devin", NAME_PX, SANS, 900, track=-14)
+    L = layout(ctx, NAME, NAME_PX, SANS, 900, track=-14)
     w, _, bl = lmetrics(L)
+    px = min(NAME_PX, NAME_PX * (W * 0.8) / w)
+    if px != NAME_PX:
+        L = layout(ctx, NAME, px, SANS, 900, track=-14)
+        w, _, bl = lmetrics(L)
     tot = w + 22 + DOT_R * 2
     x0 = CX - tot / 2
-    return L, w, bl, x0, (x0 + w + 22 + DOT_R, NAME_BASE - DOT_R)
+    return px, w, bl, x0, (x0 + w + 22 + DOT_R, NAME_BASE - DOT_R)
 
 
 def dot_pos(t, x0, fx, fy):
@@ -977,7 +982,7 @@ def dot_pos(t, x0, fx, fy):
 
 def s_signature(ctx, t):
     fill_bg(ctx, BG)
-    L, w, bl, x0, (fx, fy) = name_geom(ctx)
+    px, w, bl, x0, (fx, fy) = name_geom(ctx)
     if t < 12.0:
         e = HOUSE(prog(t, 11.5, 12.0))
         r = lerp(1200, DOT_R, e)
@@ -1018,10 +1023,10 @@ def s_signature(ctx, t):
     ctx.save()
     ctx.rectangle(0, 0, max(0, reveal), H)
     ctx.clip()
-    gl, _, _ = glyphs(ctx, "Claude Opus 5.5", NAME_PX, SANS, 900, track=-14)
+    gl, _, _ = glyphs(ctx, NAME, px, SANS, 900, track=-14)
     for i, (ch, gx, adv) in enumerate(gl):
         k = out_expo(prog(t, 12.32 + i * 0.06, 12.8 + i * 0.06))
-        text(ctx, ch, x0 + gx, NAME_BASE + (1 - k) * 40, NAME_PX, INK, SANS, 900, ax=0)
+        text(ctx, ch, x0 + gx, NAME_BASE + (1 - k) * 40, px, INK, SANS, 900, ax=0)
     ctx.restore()
 
     # role + meta
