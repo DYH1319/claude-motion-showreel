@@ -315,8 +315,8 @@ def hud(ctx, t):
     ctx.stroke()
 
     fs, ty, by = 15, 86, H - 72
-    text(ctx, "DEVIN", 84, ty, fs, c, MONO, 800, track=3, ax=0, alpha=a)
-    text(ctx, "MOTION REEL '26", 150, ty, fs, c, MONO, 400, track=3, ax=0, alpha=a * 0.7)
+    text(ctx, "CLAUDE", 84, ty, fs, c, MONO, 800, track=3, ax=0, alpha=a)
+    text(ctx, "MOTION REEL '26", 162, ty, fs, c, MONO, 400, track=3, ax=0, alpha=a * 0.7)
 
     idx = max(i for i, s in enumerate(SCENES) if t >= s[0])
     st, num, name = SCENES[idx]
