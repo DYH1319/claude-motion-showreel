@@ -617,7 +617,7 @@ def easing_card(ctx, t):
     u = frac((t - 5.5) / 1.0) if t > 5.5 else 0.0
     text(ctx, f"t = {u:.2f}", x0 + cw - 36, y0 + 52, 16, ORG, MONO, 500, track=2, ax=1)
 
-    gx, gy, gs = x0 + 90, y0 + 470, 440
+    gx, gy, gs = x0 + 110, y0 + 500, 400
     rgb(ctx, INK, 0.12)
     ctx.set_line_width(1)
     for q in range(5):
